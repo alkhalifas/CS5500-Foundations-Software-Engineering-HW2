@@ -7,7 +7,20 @@ export default function TagsList() {
 
     return (
         <div>
-            <h2>Total Tags: {tags.length}</h2>
+            <div>
+
+                <div className="header-container">
+                    <h1>All Tags</h1>
+                </div>
+
+                <div className="header-container">
+                    <h3>{tags.length} tags</h3>
+
+
+                </div>
+
+            </div>
+
             <div className="tags-container">
                 {tags.map((tag, index) => (
                     <div key={tag.tid}>

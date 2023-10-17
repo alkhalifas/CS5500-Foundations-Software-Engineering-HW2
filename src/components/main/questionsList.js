@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
 import dataModel from '../../models/datamodel';
+import QuestionForm from "./questionForm";
 
 export default function QuestionsList() {
-    const [showQuestions, setShowQuestions] = useState(true);
+    const [showForm, setShowForm] = useState(false);
     const [sortedQuestions, setSortedQuestions] = useState(dataModel.getAllQuestions());
-    const [formData, setFormData] = useState({
-        title: '',
-        text: '',
-        tagNames: '',
-        askedBy: '',
-    });
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+
+    const handleAskQuestion = () => {
+        setShowForm(true);
     };
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        const newQuestion = {
-            title: formData.title,
-            text: formData.text,
-            tagNames: formData.tagNames,
-            askedBy: formData.askedBy,
-        };
-        dataModel.addQuestion(newQuestion);
-        setShowQuestions(true);
+
+    const handleFormSubmit = (formData) => {
+        dataModel.addQuestion(formData);
+        setShowForm(false);
     };
 
     const handleSort = (sortType) => {
@@ -56,17 +45,25 @@ export default function QuestionsList() {
 
     return (
         <div>
-            {showQuestions ? (
+            {showForm ? (
+                <QuestionForm onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} />
+            ) : (
                 <>
-                    <h2>Total Questions: {sortedQuestions.length}</h2>
-                    <div className="sorting-buttons">
-                        <button onClick={() => setShowQuestions(false)}>Ask a Question</button>
+                    <div className="header-container">
+                        <h1>All Questions</h1>
+                        <button className={"ask-question-button"} onClick={handleAskQuestion}>Ask a Question</button>
                     </div>
-                    <div className="sorting-buttons">
-                        <button onClick={() => handleSort('newest')}>Newest</button>
-                        <button onClick={() => handleSort('active')}>Active</button>
-                        <button onClick={() => handleSort('unanswered')}>Unanswered</button>
+
+                    <div className="header-container">
+                        <h3>{sortedQuestions.length} questions</h3>
+
+                        <div className="sorting-buttons">
+                            <button className={"sort-button"} onClick={() => handleSort('newest')}>Newest</button>
+                            <button className={"sort-button"} onClick={() => handleSort('active')}>Active</button>
+                            <button className={"sort-button"} onClick={() => handleSort('unanswered')}>Unanswered</button>
+                        </div>
                     </div>
+
                     <div className="question-cards">
                         {sortedQuestions.map((question) => (
                             <div key={question.qid} className="question-card">
@@ -78,29 +75,11 @@ export default function QuestionsList() {
                             </div>
                         ))}
                     </div>
+
+
                 </>
-            ) : (
-                <form className="question-form" onSubmit={handleFormSubmit}>
-                    <label>
-                        Title:
-                        <input type="text" name="title" value={formData.title} onChange={handleInputChange} required />
-                    </label>
-                    <label>
-                        Question:
-                        <textarea name="text" value={formData.text} onChange={handleInputChange} required />
-                    </label>
-                    <label>
-                        Tags (comma-separated):
-                        <input type="text" name="tagNames" value={formData.tagNames} onChange={handleInputChange} />
-                    </label>
-                    <label>
-                        Asked By:
-                        <input type="text" name="askedBy" value={formData.askedBy} onChange={handleInputChange} />
-                    </label>
-                    <button type="submit">Submit</button>
-                    <button type="button" onClick={() => setShowQuestions(true)}>Cancel</button>
-                </form>
             )}
         </div>
     );
+
 }
