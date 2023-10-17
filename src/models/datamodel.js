@@ -95,19 +95,36 @@ class DataModel {
     }
 
     addQuestion(questionData) {
-        const question = new Question(
-            questionData.qid,
-            questionData.title,
-            questionData.text,
-            questionData.tagIds,
-            questionData.askedBy,
-            questionData.askDate,
-            questionData.ansIds || [],
-            questionData.views || 0
-        );
-        this.questions.push(question);
-        return question;
+        const tagNames = questionData.tagNames.split(',').map(tagName => tagName.trim());
+
+        const tagIds = tagNames.map(tagName => {
+            const existingTag = this.tags.find(tag => tag.name === tagName);
+            if (existingTag) {
+                return existingTag.tid;
+            } else {
+                const newTag = {
+                    tid: `t${this.tags.length + 1}`,
+                    name: tagName,
+                };
+                this.tags.push(newTag);
+                return newTag.tid;
+            }
+        });
+
+        const newQuestion = {
+            qid: `q${this.questions.length + 1}`,
+            title: questionData.title,
+            text: questionData.text,
+            tagIds: tagIds,
+            askedBy: questionData.askedBy,
+            askDate: new Date(),
+            ansIds: [],
+            views: 0,
+        };
+
+        this.questions.push(newQuestion);
     }
+
 
     addAnswer(questionId, answerData) {
         const answer = new Answer(
@@ -126,6 +143,17 @@ class DataModel {
 
     getAllTags() {
         return this.tags;
+    }
+
+    getAllTagsWithQuestionCount() {
+        const tagsWithCount = this.tags.map(tag => {
+            const questionsWithTag = this.questions.filter(question => question.tagIds.includes(tag.tid));
+            return {
+                ...tag,
+                questionCount: questionsWithTag.length,
+            };
+        });
+        return tagsWithCount;
     }
 
     incrementQuestionViews(questionId) {
