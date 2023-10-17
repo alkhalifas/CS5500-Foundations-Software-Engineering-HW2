@@ -1,9 +1,28 @@
+import React, { useState } from "react";
+import "./menubar.css"
 
-export default function Menubar() {
+export default function Menubar({ onSelect }) {
+    const [selectedButton, setSelectedButton] = useState("questions");
+
+    const handleButtonClick = (button) => {
+        setSelectedButton(button);
+        onSelect(button);
+    };
+
     return (
-        <div className="menu">
-            <button className="menu-btn">Questions</button>
-            <button className="menu-btn">Tags</button>
-        </div>
+        <aside className="menu">
+            <button
+                className={selectedButton === "questions" ? "menu-btn dark-active" : "menu-btn"}
+                onClick={() => handleButtonClick("questions")}
+            >
+                Questions
+            </button>
+            <button
+                className={selectedButton === "tags" ? "menu-btn dark-active" : "menu-btn"}
+                onClick={() => handleButtonClick("tags")}
+            >
+                Tags
+            </button>
+        </aside>
     );
 }
