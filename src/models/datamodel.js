@@ -145,6 +145,17 @@ class DataModel {
         return this.tags;
     }
 
+    getAllTagsWithQuestionCount() {
+        const tagsWithCount = this.tags.map(tag => {
+            const questionsWithTag = this.questions.filter(question => question.tagIds.includes(tag.tid));
+            return {
+                ...tag,
+                questionCount: questionsWithTag.length,
+            };
+        });
+        return tagsWithCount;
+    }
+
     incrementQuestionViews(questionId) {
         const question = this.questions.find(q => q.qid === questionId);
         if (question) {
