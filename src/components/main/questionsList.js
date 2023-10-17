@@ -7,7 +7,7 @@ export default function QuestionsList() {
     const [formData, setFormData] = useState({
         title: '',
         text: '',
-        tagIds: '',
+        tagNames: '',
         askedBy: '',
     });
 
@@ -19,16 +19,12 @@ export default function QuestionsList() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const newQuestion = {
-            qid: `q${dataModel.questions.length + 1}`,
             title: formData.title,
             text: formData.text,
-            tagIds: formData.tagIds.split(','),
+            tagNames: formData.tagNames,
             askedBy: formData.askedBy,
-            askDate: new Date(),
-            ansIds: [],
-            views: 0,
         };
-        dataModel.questions.push(newQuestion);
+        dataModel.addQuestion(newQuestion);
         setShowQuestions(true);
     };
 
@@ -77,6 +73,7 @@ export default function QuestionsList() {
                                 <h3>{question.title}</h3>
                                 <p>Asked by: {question.askedBy}</p>
                                 <p>Number of Answers: {dataModel.getQuestionAnswers(question.qid).length}</p>
+                                <p>Tags: {question.tags}</p> {/* Display the tag names */}
                                 <p>Number of Views: {question.views}</p>
                             </div>
                         ))}
@@ -94,7 +91,11 @@ export default function QuestionsList() {
                     </label>
                     <label>
                         Tags (comma-separated):
-                        <input type="text" name="tagIds" value={formData.tagIds} onChange={handleInputChange} />
+                        <input type="text" name="tagNames" value={formData.tagNames} onChange={handleInputChange} />
+                    </label>
+                    <label>
+                        Asked By:
+                        <input type="text" name="askedBy" value={formData.askedBy} onChange={handleInputChange} />
                     </label>
                     <button type="submit">Submit</button>
                     <button type="button" onClick={() => setShowQuestions(true)}>Cancel</button>
