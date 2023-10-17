@@ -1,1 +1,7 @@
-/* Add global CSS here */
+/* Reset default margin and padding */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Calibri, Arial, sans-serif;
+}
