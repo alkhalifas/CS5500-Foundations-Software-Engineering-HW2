@@ -5,7 +5,23 @@ Read the HW specifications [here](https://northeastern-my.sharepoint.com/:w:/g/p
 In the sections below, list and describe each contribution briefly.
 
 ## Team Member 1 Contribution
+- [ ] Home Page
+- [ ] Add Question
+- [ ] Tags Page
+- [ ] View Question
+- [X] Data Model
+
 
 ## Team Member 2 Contribution
+- [ ] Add Answer
+- [ ] View Questions for Tag
+- [ ] Searching
+- [ ] Sorting
+
+
+
+
 
 **Create a directory design and submit your design documents there.** Design documents include the class diagrams and the sequence diagrams.
+
+## Backlog:

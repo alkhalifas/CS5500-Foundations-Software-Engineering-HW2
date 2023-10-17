@@ -21,3 +21,7 @@
 .dark-active {
     background-color: #999;
 }
+
+button {
+    font-size: 18px;
+}

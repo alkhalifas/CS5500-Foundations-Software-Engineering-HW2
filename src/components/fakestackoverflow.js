@@ -2,8 +2,8 @@ import Header from "./header/header";
 import Menubar from "./menubar/menubar";
 import "./fakestackoverflow.css"
 // import MainContent from "./main/main";
-import QuestionsList from "./main/questionsList";
-import TagsList from "./main/tagsList";
+import QuestionsList from "./main/questionList/questionsList";
+import TagsList from "./main/tagsList/tagsList";
 import {useState} from "react";
 
 
