@@ -2,20 +2,28 @@ import React, { useState } from 'react';
 import dataModel from '../../../models/datamodel';
 import QuestionForm from "../questionForm/questionForm";
 import "./questionList.css"
+import SingleQuestion from "./singleQuestion";
 
 export default function QuestionsList() {
     const [showForm, setShowForm] = useState(false);
+    const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [sortedQuestions, setSortedQuestions] = useState(dataModel.getAllQuestions());
-
 
     const handleAskQuestion = () => {
         setShowForm(true);
     };
 
-
     const handleFormSubmit = (formData) => {
         dataModel.addQuestion(formData);
         setShowForm(false);
+    };
+
+    const handleQuestionClick = (question) => {
+        setSelectedQuestion(question);
+    };
+
+    const handleBackToList = () => {
+        setSelectedQuestion(null);
     };
 
     const handleSort = (sortType) => {
@@ -45,9 +53,12 @@ export default function QuestionsList() {
     };
 
     return (
+
         <div>
             {showForm ? (
                 <QuestionForm onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} />
+            ) : selectedQuestion ? (
+                <SingleQuestion question={selectedQuestion} onBack={handleBackToList} />
             ) : (
                 <>
                     <div className="header-container">
@@ -67,7 +78,11 @@ export default function QuestionsList() {
                     <div className="question-cards">
                         {sortedQuestions.map((question, index) => (
                             <>
-                                <div key={question.qid} className="question-card">
+                                <div
+                                    key={question.qid}
+                                    className="question-card"
+                                    onClick={() => handleQuestionClick(question)}
+                                >
                                     <div className={"question-left"}>
                                         <p>{question.views} views</p>
                                         <p>{dataModel.getQuestionAnswers(question.qid).length} answers</p>
@@ -83,13 +98,10 @@ export default function QuestionsList() {
                                 </div>
                                 {index !== sortedQuestions.length - 1 && <div className="dotted-line" />}
                             </>
-                        ))}
+                            ))}
                     </div>
-
-
                 </>
             )}
         </div>
     );
-
 }
