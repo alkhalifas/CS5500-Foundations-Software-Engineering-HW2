@@ -1,7 +1,17 @@
-
+import Header from "./header/header";
+import Menubar from "./menubar/menubar";
+import "./fakestackoverflow.css"
+import MainContent from "./main/main";
 
 export default function fakeStackOverflow() {
   return (
-    <h1> Replace with relevant content </h1>
+      <>
+          <Header />
+          <div className="content-container">
+              <Menubar />
+              <MainContent />
+          </div>
+      </>
+
   );
 }
