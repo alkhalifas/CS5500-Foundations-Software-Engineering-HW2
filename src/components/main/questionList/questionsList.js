@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import dataModel from '../../models/datamodel';
-import QuestionForm from "./questionForm";
+import dataModel from '../../../models/datamodel';
+import QuestionForm from "../questionForm/questionForm";
+import "./questionList.css"
 
 export default function QuestionsList() {
     const [showForm, setShowForm] = useState(false);
@@ -56,7 +57,6 @@ export default function QuestionsList() {
 
                     <div className="header-container">
                         <h3>{sortedQuestions.length} questions</h3>
-
                         <div className="sorting-buttons">
                             <button className={"sort-button"} onClick={() => handleSort('newest')}>Newest</button>
                             <button className={"sort-button"} onClick={() => handleSort('active')}>Active</button>
@@ -65,14 +65,24 @@ export default function QuestionsList() {
                     </div>
 
                     <div className="question-cards">
-                        {sortedQuestions.map((question) => (
-                            <div key={question.qid} className="question-card">
-                                <h3>{question.title}</h3>
-                                <p>Asked by: {question.askedBy}</p>
-                                <p>Number of Answers: {dataModel.getQuestionAnswers(question.qid).length}</p>
-                                <p>Tags: {question.tags}</p> {/* Display the tag names */}
-                                <p>Number of Views: {question.views}</p>
-                            </div>
+                        {sortedQuestions.map((question, index) => (
+                            <>
+                                <div key={question.qid} className="question-card">
+                                    <div className={"question-left"}>
+                                        <p>{question.views} views</p>
+                                        <p>{dataModel.getQuestionAnswers(question.qid).length} answers</p>
+                                    </div>
+                                    <div className={"question-mid"}>
+                                        <h4>{question.title}</h4>
+                                        <p style={{"fontSize":"12px"}}>{question.text}</p>
+                                        <p>Tags: {question.tags}</p>
+                                    </div>
+                                    <div className={"question-right"}>
+                                        <p>Asked by: {question.askedBy}</p>
+                                    </div>
+                                </div>
+                                {index !== sortedQuestions.length - 1 && <div className="dotted-line" />}
+                            </>
                         ))}
                     </div>
 

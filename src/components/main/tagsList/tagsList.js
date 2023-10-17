@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import dataModel from '../../models/datamodel';
+import dataModel from '../../../models/datamodel';
 import "./tagsList.css"
-import QuestionForm from "./questionForm";
+import QuestionForm from "../questionForm/questionForm";
 
 export default function TagsList() {
     const [showForm, setShowForm] = useState(false);
