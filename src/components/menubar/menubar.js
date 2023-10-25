@@ -10,7 +10,7 @@ export default function Menubar({ onSelect }) {
     };
 
     return (
-        <aside className="menu">
+        <aside className="menu sideBarNav">
             <button
                 className={selectedButton === "questions" ? "menu-btn dark-active" : "menu-btn"}
                 onClick={() => handleButtonClick("questions")}

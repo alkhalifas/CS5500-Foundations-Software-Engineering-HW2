@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import dataModel from '../../../models/datamodel';
 import QuestionForm from "../questionForm/questionForm";
 import "./questionList.css"
 import SingleQuestion from "./singleQuestion";
+import QuestionCardTiming from "./QuestionCardTiming";
 
 export default function QuestionsList() {
     const [showForm, setShowForm] = useState(false);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [sortedQuestions, setSortedQuestions] = useState(dataModel.getAllQuestions());
+
+    useEffect(() => {
+        const questions = dataModel.getAllQuestions();
+
+        console.log("questions: ", questions)
+
+        const sortedQuestionsArray = [...questions].sort((a, b) => b.askDate - a.askDate);
+        setSortedQuestions(sortedQuestionsArray);
+    }, []);
 
     const handleAskQuestion = () => {
         setShowForm(true);
@@ -77,27 +87,34 @@ export default function QuestionsList() {
 
                     <div className="question-cards">
                         {sortedQuestions.map((question, index) => (
-                            <>
+                            <div key={question.qid}>
                                 <div
                                     key={question.qid}
                                     className="question-card"
                                     onClick={() => handleQuestionClick(question)}
                                 >
-                                    <div className={"question-left"}>
+                                    <div className={"question-left postStats"}>
                                         <p>{question.views} views</p>
                                         <p>{dataModel.getQuestionAnswers(question.qid).length} answers</p>
                                     </div>
                                     <div className={"question-mid"}>
-                                        <h4>{question.title}</h4>
+                                        <h4 className={"postTitle"}>{question.title}</h4>
                                         <p style={{"fontSize":"12px"}}>{question.text}</p>
-                                        <p>Tags: {question.tags}</p>
+                                        {/*<p>Tags: {question.tags}</p>*/}
+                                        {/*<p>Tags: {question.getTagNames(dataModel.tags).join(', ')}</p>*/}
+                                        <div className="tags">
+                                            {question.getTagsWithNames(dataModel.tags).map(tag => (
+                                                <span key={tag.id} className="badge">{tag.name}</span>
+                                            ))}
+                                        </div>
+
                                     </div>
-                                    <div className={"question-right"}>
-                                        <p>Asked by: {question.askedBy}</p>
+                                    <div className={"question-right lastActivity"}>
+                                        <QuestionCardTiming question={question} />
                                     </div>
                                 </div>
                                 {index !== sortedQuestions.length - 1 && <div className="dotted-line" />}
-                            </>
+                            </div>
                             ))}
                     </div>
                 </>
