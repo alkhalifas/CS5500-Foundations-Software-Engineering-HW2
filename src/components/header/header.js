@@ -8,8 +8,6 @@ export default function Header() {
                     <input type="text" placeholder="Search..." id={"searchBar"}/>
                 </div>
             </div>
-
         </>
-
     );
 }
