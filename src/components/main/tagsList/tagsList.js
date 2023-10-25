@@ -30,15 +30,11 @@ export default function TagsList() {
 
                     <div className="tags-container">
                         {tagsWithQuestionCount.map((tag) => (
-                            <div key={tag.tid}>
-                                <div className="tag-box dotted-line tagNode">
-                                    <a href={`/`} className="tag-link">
-                                        {tag.name}
-                                    </a>
-                                    <p>
-                                        ({tag.questionCount} questions)
-                                    </p>
-                                </div>
+                            <div key={tag.tid} className="tag-box">
+                                <a href={`/`} className="tag-link">
+                                    {tag.name}
+                                </a>
+                                <p>({tag.questionCount} questions)</p>
                             </div>
                         ))}
                     </div>
