@@ -66,3 +66,7 @@ body, html {
 .asked-by {
     color: red; /* Text color for askedBy name */
 }
+
+.blue-filter {
+    color: royalblue;
+}

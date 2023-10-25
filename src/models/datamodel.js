@@ -184,6 +184,11 @@ class DataModel {
         return this.tags;
     }
 
+    getTagNameById(tagId) {
+        const tag = this.tags.find(tag => tag.tid === tagId);
+        return tag ? tag.name : null;
+    }
+
     getAllTagsWithQuestionCount() {
         const tagsWithCount = this.tags.map(tag => {
             const questionsWithTag = this.questions.filter(question => question.tagIds.includes(tag.tid));
