@@ -7,7 +7,7 @@ In the sections below, list and describe each contribution briefly.
 ## Team Member 1 Contribution
 - [X] Home Page
 - [ ] Add Question
-- [ ] Tags Page
+- [X] Tags Page
 - [ ] View Question
 - [X] Data Model
 
