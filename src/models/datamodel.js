@@ -16,6 +16,20 @@ class Question {
         return this.ansIds.map(answerId => answers.find(ans => ans.aid === answerId));
     }
 
+    getTagNames(tags) {
+        return this.tagIds.map(tagId => {
+            const tag = tags.find(tag => tag.tid === tagId);
+            return tag ? tag.name : '';
+        });
+    }
+
+    getTagsWithNames(tags) {
+        return this.tagIds.map(tagId => {
+            const tag = tags.find(tag => tag.tid === tagId);
+            return tag ? { id: tag.tid, name: tag.name } : null;
+        }).filter(tag => tag !== null);
+    }
+
     getTags(tags) {
         return this.tagIds.map(tagId => tags.find(tag => tag.tid === tagId));
     }
@@ -89,6 +103,18 @@ class DataModel {
 
     getAllQuestions() {
         return this.questions;
+    }
+
+    getQuestionsWithTagsAndAnswers() {
+        return this.questions.map(question => {
+            const tags = question.tagIds.map(tagId => this.tags.find(tag => tag.tid === tagId));
+            const answers = question.ansIds.map(answerId => this.answers.find(ans => ans.aid === answerId));
+            return {
+                ...question,
+                tags,
+                answers
+            };
+        });
     }
 
     getQuestionTags(questionId) {
