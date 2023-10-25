@@ -23,6 +23,7 @@ export default function TagsList() {
             ) : (
                 <>
                     <div className="header-container">
+                        <h3>{tagsWithQuestionCount.length} Tags</h3>
                         <h1>All Tags</h1>
                         <button className={"ask-question-button"} onClick={handleAskQuestion}>Ask a Question</button>
                     </div>
@@ -30,7 +31,7 @@ export default function TagsList() {
                     <div className="tags-container">
                         {tagsWithQuestionCount.map((tag) => (
                             <div key={tag.tid}>
-                                <div className="tag-box dotted-line">
+                                <div className="tag-box dotted-line tagNode">
                                     <a href={`/`} className="tag-link">
                                         {tag.name}
                                     </a>
