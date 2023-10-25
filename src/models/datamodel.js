@@ -11,6 +11,19 @@ class Question {
         this.ansIds = ansIds;
         this.views = views;
     }
+
+    getAnswers(answers) {
+        return this.ansIds.map(answerId => answers.find(ans => ans.aid === answerId));
+    }
+
+    getTags(tags) {
+        return this.tagIds.map(tagId => tags.find(tag => tag.tid === tagId));
+    }
+
+    incrementViews() {
+        this.views += 1;
+    }
+
 }
 
 class Answer {
@@ -156,12 +169,7 @@ class DataModel {
         return tagsWithCount;
     }
 
-    incrementQuestionViews(questionId) {
-        const question = this.questions.find(q => q.qid === questionId);
-        if (question) {
-            question.views += 1;
-        }
-    }
+
 }
 
 const dataModel = DataModel.getInstance();
