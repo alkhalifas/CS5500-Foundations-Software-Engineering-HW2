@@ -26,29 +26,29 @@ export default function QuestionCardTiming({ question }) {
 
     let metadata = '';
     if (timeDifference < 60) {
-        metadata = `${question.askedBy} asked ${timeDifference} seconds ago`;
+        metadata = `asked ${timeDifference} second${timeDifference > 1 ? 's' : ''} ago`;
     } else if (timeDifference < 3600) {
         const minutes = Math.floor(timeDifference / 60);
-        metadata = `${question.askedBy} asked ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        metadata = `asked ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
     } else if (timeDifference < 86400) {
         const hours = Math.floor(timeDifference / 3600);
-        metadata = `${question.askedBy} asked ${hours} hour${hours > 1 ? 's' : ''} ago`;
+        metadata = `asked ${hours} hour${hours > 1 ? 's' : ''} ago`;
     } else if (now.getDate() === askDate.getDate() && now.getMonth() === askDate.getMonth() && now.getFullYear() === askDate.getFullYear()) {
         const formattedTime = formatTime(askDate);
-        metadata = `${question.askedBy} asked today at ${formattedTime}`;
+        metadata = `asked today at ${formattedTime}`;
     } else if (now.getFullYear() === askDate.getFullYear()) {
         const formattedDate = formatDate(askDate);
         const formattedTime = formatTime(askDate);
-        metadata = `${question.askedBy} asked ${formattedDate} at ${formattedTime}`;
+        metadata = `asked ${formattedDate} at ${formattedTime}`;
     } else {
         const formattedDate = formatDate(askDate);
         const formattedTime = formatTime(askDate);
-        metadata = `${question.askedBy} asked ${formattedDate}, ${askDate.getFullYear()} at ${formattedTime}`;
+        metadata = `asked ${formattedDate}, ${askDate.getFullYear()} at ${formattedTime}`;
     }
 
     return (
         <div className="question-card-timing">
-            <span className="asked-by">{question.askedBy}</span> asked {metadata}
+            <span className="asked-by">{question.askedBy}</span> {metadata}
         </div>
     );
 }
