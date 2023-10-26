@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import dataModel from '../../../models/datamodel';
 import QuestionForm from "../questionForm/questionForm";
 import "./questionList.css"
-import SingleQuestion from "./singleQuestion";
+import AnswersPage from "../Answers/AnswersPage";
 import QuestionCardTiming from "./QuestionCardTiming";
 
 export default function QuestionsList() {
@@ -13,7 +13,6 @@ export default function QuestionsList() {
     useEffect(() => {
         const questions = dataModel.getAllQuestions();
 
-        console.log("questions: ", questions)
 
         const sortedQuestionsArray = [...questions].sort((a, b) => b.askDate - a.askDate);
         setSortedQuestions(sortedQuestionsArray);
@@ -68,7 +67,15 @@ export default function QuestionsList() {
             {showForm ? (
                 <QuestionForm onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} />
             ) : selectedQuestion ? (
-                <SingleQuestion question={selectedQuestion} onBack={handleBackToList} />
+                <div id={"answersHeader"}>
+                    <div className="header-container">
+                        <h1></h1>
+                        <button className={"ask-question-button"} onClick={handleAskQuestion}>Ask a Question</button>
+                    </div>
+                    <AnswersPage question={selectedQuestion} onBack={handleBackToList} />
+
+                </div>
+
             ) : (
                 <>
                     <div className="header-container">
