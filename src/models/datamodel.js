@@ -184,6 +184,10 @@ class DataModel {
         return this.tags;
     }
 
+    getAnswerById(answerId) {
+        return this.answers.find(ans => ans.aid === answerId);
+    }
+
     getTagNameById(tagId) {
         const tag = this.tags.find(tag => tag.tid === tagId);
         return tag ? tag.name : null;
