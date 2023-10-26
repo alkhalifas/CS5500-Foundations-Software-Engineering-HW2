@@ -5,9 +5,9 @@ Read the HW specifications [here](https://northeastern-my.sharepoint.com/:w:/g/p
 In the sections below, list and describe each contribution briefly.
 
 ## Team Member 1 Contribution
-- [ ] Home Page
+- [X] Home Page
 - [ ] Add Question
-- [ ] Tags Page
+- [X] Tags Page
 - [ ] View Question
 - [X] Data Model
 

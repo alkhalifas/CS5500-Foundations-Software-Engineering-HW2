@@ -5,11 +5,9 @@ export default function Header() {
             <div className="header">
                 Fake Stack Overflow
                 <div className="search-bar">
-                    <input type="text" placeholder="Search..." />
+                    <input type="text" placeholder="Search..." id={"searchBar"}/>
                 </div>
             </div>
-
         </>
-
     );
 }

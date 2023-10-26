@@ -11,6 +11,33 @@ class Question {
         this.ansIds = ansIds;
         this.views = views;
     }
+
+    getAnswers(answers) {
+        return this.ansIds.map(answerId => answers.find(ans => ans.aid === answerId));
+    }
+
+    getTagNames(tags) {
+        return this.tagIds.map(tagId => {
+            const tag = tags.find(tag => tag.tid === tagId);
+            return tag ? tag.name : '';
+        });
+    }
+
+    getTagsWithNames(tags) {
+        return this.tagIds.map(tagId => {
+            const tag = tags.find(tag => tag.tid === tagId);
+            return tag ? { id: tag.tid, name: tag.name } : null;
+        }).filter(tag => tag !== null);
+    }
+
+    getTags(tags) {
+        return this.tagIds.map(tagId => tags.find(tag => tag.tid === tagId));
+    }
+
+    incrementViews() {
+        this.views += 1;
+    }
+
 }
 
 class Answer {
@@ -76,6 +103,18 @@ class DataModel {
 
     getAllQuestions() {
         return this.questions;
+    }
+
+    getQuestionsWithTagsAndAnswers() {
+        return this.questions.map(question => {
+            const tags = question.tagIds.map(tagId => this.tags.find(tag => tag.tid === tagId));
+            const answers = question.ansIds.map(answerId => this.answers.find(ans => ans.aid === answerId));
+            return {
+                ...question,
+                tags,
+                answers
+            };
+        });
     }
 
     getQuestionTags(questionId) {
@@ -145,6 +184,15 @@ class DataModel {
         return this.tags;
     }
 
+    getAnswerById(answerId) {
+        return this.answers.find(ans => ans.aid === answerId);
+    }
+
+    getTagNameById(tagId) {
+        const tag = this.tags.find(tag => tag.tid === tagId);
+        return tag ? tag.name : null;
+    }
+
     getAllTagsWithQuestionCount() {
         const tagsWithCount = this.tags.map(tag => {
             const questionsWithTag = this.questions.filter(question => question.tagIds.includes(tag.tid));
@@ -156,12 +204,7 @@ class DataModel {
         return tagsWithCount;
     }
 
-    incrementQuestionViews(questionId) {
-        const question = this.questions.find(q => q.qid === questionId);
-        if (question) {
-            question.views += 1;
-        }
-    }
+
 }
 
 const dataModel = DataModel.getInstance();
