@@ -26,7 +26,7 @@ export default function AnswerCardTiming({ answer }) {
 
     let metadata = '';
     if (timeDifference < 60) {
-        metadata = `answered ${timeDifference} second${timeDifference > 1 ? 's' : ''} ago`;
+        metadata = `answered ${timeDifference} seconds ago`;
     } else if (timeDifference < 3600) {
         const minutes = Math.floor(timeDifference / 60);
         metadata = `answered ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
