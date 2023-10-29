@@ -25,4 +25,9 @@ In the sections below, list and describe each contribution briefly.
 
 **Create a directory design and submit your design documents there.** Design documents include the class diagrams and the sequence diagrams.
 
-## Backlog:
+## Design Patterns:
+
+1. Facade:
+2. Singletonian: 
+3. Builder:
+4. Factory:

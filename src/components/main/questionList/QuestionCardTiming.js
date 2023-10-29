@@ -26,7 +26,7 @@ export default function QuestionCardTiming({ question }) {
 
     let metadata = '';
     if (timeDifference < 60) {
-        metadata = `asked ${timeDifference} second${timeDifference > 1 ? 's' : ''} ago`;
+        metadata = `asked ${timeDifference} seconds ago`;
     } else if (timeDifference < 3600) {
         const minutes = Math.floor(timeDifference / 60);
         metadata = `asked ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
