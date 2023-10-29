@@ -5,6 +5,12 @@ import "./questionList.css"
 import AnswersPage from "../Answers/AnswersPage";
 import QuestionCardTiming from "./QuestionCardTiming";
 
+const formatQuestionText = (text) => {
+    const regex = /\[(.*?)\]\((.*?)\)/g;
+    const formattedText = text.replace(regex, '<a href="$2" target="_blank">$1</a>');
+    return { __html: formattedText };
+};
+
 export default function QuestionsList() {
     const [showForm, setShowForm] = useState(false);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -89,7 +95,7 @@ export default function QuestionsList() {
                         </div>
                     </div>
 
-                    <div className="question-cards">
+                    <div className="question-cards scrollable-container">
                         {sortedQuestions.map((question, index) => (
                             <div key={question.qid}>
                                 <div
@@ -103,15 +109,22 @@ export default function QuestionsList() {
                                     </div>
                                     <div className={"question-mid"}>
                                         <h4 className={"postTitle"}>{question.title}</h4>
-                                        <p style={{"fontSize":"12px"}}>{question.text}</p>
-                                        {/*<p>Tags: {question.tags}</p>*/}
-                                        {/*<p>Tags: {question.getTagNames(dataModel.tags).join(', ')}</p>*/}
+                                        <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
                                         <div className="tags">
                                             {question.getTagsWithNames(dataModel.tags).map(tag => (
                                                 <span key={tag.id} className="badge">{tag.name}</span>
                                             ))}
                                         </div>
                                     </div>
+                                    {/*<div className={"question-mid"}>*/}
+                                    {/*    <h4 className={"postTitle"}>{question.title}</h4>*/}
+                                    {/*    <p style={{"fontSize":"12px"}}>{question.text}</p>*/}
+                                    {/*    <div className="tags">*/}
+                                    {/*        {question.getTagsWithNames(dataModel.tags).map(tag => (*/}
+                                    {/*            <span key={tag.id} className="badge">{tag.name}</span>*/}
+                                    {/*        ))}*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
                                     <div className={"question-right lastActivity"}>
                                         <QuestionCardTiming question={question} />
                                     </div>
