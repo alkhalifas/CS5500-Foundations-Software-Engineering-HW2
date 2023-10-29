@@ -34,10 +34,6 @@ export default function QuestionsList() {
         setSelectedQuestion(question);
     };
 
-    const handleBackToList = () => {
-        setSelectedQuestion(null);
-    };
-
     const handleSort = (sortType) => {
         let sortedQuestionsArray = [...dataModel.getAllQuestions()];
 
@@ -67,14 +63,14 @@ export default function QuestionsList() {
     return (
         <div>
             {showForm ? (
-                <QuestionForm onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} />
+                <QuestionForm onSubmit={handleFormSubmit} />
             ) : selectedQuestion ? (
                 <div id={"answersHeader"}>
                     <div className="header-container">
                         <h1></h1>
                         <button className={"ask-question-button"} onClick={handleAskQuestion}>Ask a Question</button>
                     </div>
-                    <AnswersPage question={selectedQuestion} onBack={handleBackToList} />
+                    <AnswersPage question={selectedQuestion} />
 
                 </div>
             ) : (

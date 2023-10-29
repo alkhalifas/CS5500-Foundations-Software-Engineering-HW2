@@ -159,7 +159,6 @@ class DataModel {
         this.questions.push(newQuestion);
     }
 
-
     addAnswer(questionId, answerData) {
         const answer = new Answer(
             `a${this.answers.length + 1}`,
@@ -170,9 +169,8 @@ class DataModel {
         this.answers.push(answer);
         const question = this.questions.find(q => q.qid === questionId);
         if (question) {
-            question.ansIds.push(answerData.aid);
+            question.ansIds.push(answer.aid);
         }
-        return answer;
     }
 
     getAllTags() {

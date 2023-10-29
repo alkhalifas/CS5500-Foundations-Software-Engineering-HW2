@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./questionForm.css"
 
-export default function QuestionForm({ onSubmit, onCancel }) {
+export default function QuestionForm({ onSubmit }) {
 
     const initialFormData = {
         title: '',
@@ -128,7 +128,6 @@ export default function QuestionForm({ onSubmit, onCancel }) {
 
             <div className="button-container">
                 <button type="submit" className="submit-button">Post Question</button>
-                <button type="button" onClick={onCancel} className="cancel-button">Cancel</button>
             </div>
 
             <div className="mandatory-text">* indicates mandatory fields</div>

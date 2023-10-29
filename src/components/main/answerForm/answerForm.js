@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./answerForm.css"
 
-export default function AnswerForm({ onSubmit, onCancel }) {
+export default function AnswerForm({ onSubmit }) {
 
     const initialFormData = {
         ansBy: '',
@@ -53,12 +53,12 @@ export default function AnswerForm({ onSubmit, onCancel }) {
                     type="text"
                     id="answerUsernameInput"
                     name="ansBy"
-                    value={formData.askedBy}
+                    value={formData.ansBy}
                     onChange={handleInputChange}
                     placeholder="Add username"
                 />
-                {validationErrors.askedBy && (
-                    <div className="error-message">{validationErrors.askedBy}</div>
+                {validationErrors.ansBy && (
+                    <div className="error-message">{validationErrors.ansBy}</div>
                 )}
             </label>
             <label>
@@ -78,7 +78,6 @@ export default function AnswerForm({ onSubmit, onCancel }) {
 
             <div className="button-container">
                 <button type="submit" className="submit-button">Post Answer</button>
-                <button type="button" onClick={onCancel} className="cancel-button">Cancel</button>
             </div>
 
             <div className="mandatory-text">* indicates mandatory fields</div>
