@@ -44,3 +44,8 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
+.scrollable-container {
+    max-height: 500px; /* Set a fixed maximum height for the scrollable container */
+    overflow-y: scroll; /* Enable vertical scrolling */
+}
