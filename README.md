@@ -6,17 +6,18 @@ In the sections below, list and describe each contribution briefly.
 
 ## Team Member 1 Contribution
 - [X] Home Page
-- [ ] Add Question
+- [X] View Questions for Tag
 - [X] Tags Page
-- [ ] View Question
+- [X] View Question
 - [X] Data Model
 
 
 ## Team Member 2 Contribution
-- [ ] Add Answer
-- [ ] View Questions for Tag
+- [X] Add Answer
+- [X] Add Question
 - [ ] Searching
-- [ ] Sorting
+- [X] Sorting
+- [ ] Hyperlink Support
 
 
 
