@@ -134,50 +134,43 @@ class DataModel {
     }
 
     addQuestion(questionData) {
-        const tagNames = questionData.tagNames.split(',').map(tagName => tagName.trim());
+        const tagNames = questionData.tagNames.split(/\s+/).map(tagName => tagName.trim());
 
         const tagIds = tagNames.map(tagName => {
-            const existingTag = this.tags.find(tag => tag.name === tagName);
-            if (existingTag) {
-                return existingTag.tid;
-            } else {
-                const newTag = {
-                    tid: `t${this.tags.length + 1}`,
-                    name: tagName,
-                };
-                this.tags.push(newTag);
-                return newTag.tid;
+            let existingTag = this.tags.find(tag => tag.name === tagName);
+            if (!existingTag) {
+                existingTag = new Tag(`t${this.tags.length + 1}`, tagName);
+                this.tags.push(existingTag);
             }
+            return existingTag.tid;
         });
 
-        const newQuestion = {
-            qid: `q${this.questions.length + 1}`,
-            title: questionData.title,
-            text: questionData.text,
-            tagIds: tagIds,
-            askedBy: questionData.askedBy,
-            askDate: new Date(),
-            ansIds: [],
-            views: 0,
-        };
+        const newQuestion = new Question(
+            `q${this.questions.length + 1}`,
+            questionData.title,
+            questionData.text,
+            tagIds,
+            questionData.askedBy,
+            new Date(),
+            [],
+            0,
+        );
 
         this.questions.push(newQuestion);
     }
 
-
     addAnswer(questionId, answerData) {
         const answer = new Answer(
-            answerData.aid,
+            `a${this.answers.length + 1}`,
             answerData.text,
             answerData.ansBy,
-            answerData.ansDate
+            new Date(),
         );
         this.answers.push(answer);
         const question = this.questions.find(q => q.qid === questionId);
         if (question) {
-            question.ansIds.push(answerData.aid);
+            question.ansIds.push(answer.aid);
         }
-        return answer;
     }
 
     getAllTags() {
@@ -203,8 +196,6 @@ class DataModel {
         });
         return tagsWithCount;
     }
-
-
 }
 
 const dataModel = DataModel.getInstance();
