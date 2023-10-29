@@ -18,10 +18,6 @@ export default function AnswersPage({ question, onBack }) {
         setAnswers(fetchedAnswers);
     }, [question.qid]);
 
-    console.log("question: ", question)
-    console.log("answers: ", answers)
-
-
     return (
         <>
             <div className="header-container">
@@ -54,19 +50,13 @@ export default function AnswersPage({ question, onBack }) {
                         </div>
                         {index !== answers.length - 1 && <div className="dotted-line" />}
                     </div>
-
-
                 ))}
             </div>
 
-            <div className="question-detail">
-                <h2></h2>
-                <button onClick={onBack}>Back to Questions</button>
+            <div className="button-container">
+                <button type="submit" className="answer-question">Answer Question</button>
+                <button type="button" onClick={onBack} className="question-detail">Back to Questions</button>
             </div>
         </>
-
     );
 }
-
-
-

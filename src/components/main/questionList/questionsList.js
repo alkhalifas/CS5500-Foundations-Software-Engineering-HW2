@@ -10,12 +10,14 @@ export default function QuestionsList() {
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [sortedQuestions, setSortedQuestions] = useState(dataModel.getAllQuestions());
 
+    function updateSortedQuestions() {
+      const questions = dataModel.getAllQuestions();
+      const sortedQuestionsArray = [...questions].sort((a, b) => b.askDate - a.askDate);
+      setSortedQuestions(sortedQuestionsArray);
+    }
+
     useEffect(() => {
-        const questions = dataModel.getAllQuestions();
-
-
-        const sortedQuestionsArray = [...questions].sort((a, b) => b.askDate - a.askDate);
-        setSortedQuestions(sortedQuestionsArray);
+        updateSortedQuestions();
     }, []);
 
     const handleAskQuestion = () => {
@@ -24,6 +26,7 @@ export default function QuestionsList() {
 
     const handleFormSubmit = (formData) => {
         dataModel.addQuestion(formData);
+        updateSortedQuestions();
         setShowForm(false);
     };
 
@@ -62,7 +65,6 @@ export default function QuestionsList() {
     };
 
     return (
-
         <div>
             {showForm ? (
                 <QuestionForm onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} />
@@ -75,7 +77,6 @@ export default function QuestionsList() {
                     <AnswersPage question={selectedQuestion} onBack={handleBackToList} />
 
                 </div>
-
             ) : (
                 <>
                     <div className="header-container">
@@ -114,7 +115,6 @@ export default function QuestionsList() {
                                                 <span key={tag.id} className="badge">{tag.name}</span>
                                             ))}
                                         </div>
-
                                     </div>
                                     <div className={"question-right lastActivity"}>
                                         <QuestionCardTiming question={question} />
