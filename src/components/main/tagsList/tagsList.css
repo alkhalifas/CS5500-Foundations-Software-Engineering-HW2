@@ -8,7 +8,7 @@
     min-width: 100px;
     min-height: 80px;
     padding: 10px;
-    border: 1px dotted #ccc;
+    border: 3px dotted #ccc;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,14 @@
 
 .tag-link {
     text-decoration: none;
-    color: #333;
+    color: black;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    cursor: pointer;
+}
+
+.tag-link:hover {
+    text-decoration: underline;
+    color: blue;
 }
 
 .tag-box p {

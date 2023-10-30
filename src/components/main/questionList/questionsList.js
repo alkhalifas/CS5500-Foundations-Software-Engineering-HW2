@@ -4,12 +4,8 @@ import QuestionForm from "../questionForm/questionForm";
 import "./questionList.css"
 import AnswersPage from "../Answers/AnswersPage";
 import QuestionCardTiming from "./QuestionCardTiming";
+import formatQuestionText from "../utils"
 
-const formatQuestionText = (text) => {
-    const regex = /\[(.*?)\]\((.*?)\)/g;
-    const formattedText = text.replace(regex, '<a href="$2" target="_blank">$1</a>');
-    return { __html: formattedText };
-};
 
 export default function QuestionsList() {
     const [showForm, setShowForm] = useState(false);
@@ -101,14 +97,17 @@ export default function QuestionsList() {
                                 <div
                                     key={question.qid}
                                     className="question-card"
-                                    onClick={() => handleQuestionClick(question)}
+
                                 >
                                     <div className={"question-left postStats"}>
                                         <p>{question.views} views</p>
                                         <p>{dataModel.getQuestionAnswers(question.qid).length} answers</p>
                                     </div>
                                     <div className={"question-mid"}>
-                                        <h4 className={"postTitle"}>{question.title}</h4>
+                                        <h4 className={"postTitle"}
+                                            onClick={() => handleQuestionClick(question)}
+                                        >{question.title}
+                                        </h4>
                                         <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
                                         <div className="tags">
                                             {question.getTagsWithNames(dataModel.tags).map(tag => (
