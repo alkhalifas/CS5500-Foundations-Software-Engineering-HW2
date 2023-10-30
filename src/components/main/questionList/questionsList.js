@@ -106,7 +106,8 @@ export default function QuestionsList() {
                                     <div className={"question-mid"}>
                                         <h4 className={"postTitle"}
                                             onClick={() => handleQuestionClick(question)}
-                                        >{question.title}</h4>
+                                        >{question.title}
+                                        </h4>
                                         <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
                                         <div className="tags">
                                             {question.getTagsWithNames(dataModel.tags).map(tag => (
