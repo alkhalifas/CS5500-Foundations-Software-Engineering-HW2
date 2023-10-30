@@ -62,7 +62,9 @@ export default function AnswersPage({ question}) {
                             <div key={answer.aid}>
                                 <div key={answer.aid} className="answer-card" id={"questionBody"}>
                                     <div className="question-text-column">
-                                        <span className="question-text">{answer.text}</span>
+                                        <span className="question-text">
+                                            <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(answer.text)} />
+                                        </span>
                                     </div>
                                     <div className="asked-by-column answerAuthor">
                                         <span className="asked-data"><AnswerCardTiming answer={answer} /></span>
