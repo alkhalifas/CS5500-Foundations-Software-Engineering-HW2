@@ -4,6 +4,7 @@ import QuestionCardTiming from "../questionList/QuestionCardTiming.js"
 import dataModel from "../../../models/datamodel";
 import AnswerCardTiming from "./AnswerCardTiming";
 import AnswerForm from "../answerForm/answerForm";
+import formatQuestionText from "../utils";
 
 export default function AnswersPage({ question}) {
     const [answers, setAnswers] = useState([]);
@@ -49,7 +50,7 @@ export default function AnswersPage({ question}) {
                             <span className="views-count">{views} views</span>
                         </div>
                         <div className="question-text-column">
-                            <span className="question-text">{question.text}</span>
+                            <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
                         </div>
                         <div className="asked-by-column">
                             <span className="asked-data"><QuestionCardTiming question={question} /></span>
@@ -61,7 +62,9 @@ export default function AnswersPage({ question}) {
                             <div key={answer.aid}>
                                 <div key={answer.aid} className="answer-card" id={"questionBody"}>
                                     <div className="question-text-column">
-                                        <span className="question-text">{answer.text}</span>
+                                        <span className="question-text">
+                                            <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(answer.text)} />
+                                        </span>
                                     </div>
                                     <div className="asked-by-column answerAuthor">
                                         <span className="asked-data"><AnswerCardTiming answer={answer} /></span>

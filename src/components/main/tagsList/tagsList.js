@@ -39,8 +39,11 @@ export default function TagsList() {
 
                             <div className="tags-container">
                                 {tagsWithQuestionCount.map((tag) => (
-                                    <div key={tag.tid} className="tag-box tagNode" onClick={() => handleTagClick(tag.tid)}>
-                                        <span className="tag-link">{tag.name}</span>
+                                    <div key={tag.tid} className="tag-box tagNode">
+                                        <span
+                                            onClick={() => handleTagClick(tag.tid)}
+                                            className="tag-link"
+                                        >{tag.name}</span>
                                         <p>({tag.questionCount} questions)</p>
                                     </div>
                                 ))}
