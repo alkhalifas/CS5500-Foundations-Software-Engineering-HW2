@@ -46,6 +46,18 @@
 }
 
 .scrollable-container {
-    max-height: 500px; /* Set a fixed maximum height for the scrollable container */
-    overflow-y: scroll; /* Enable vertical scrolling */
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.postTitle {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    cursor: pointer;
+}
+
+.postTitle:hover {
+    text-decoration: underline;
+    color: blue;
 }

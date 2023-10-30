@@ -97,14 +97,16 @@ export default function QuestionsList() {
                                 <div
                                     key={question.qid}
                                     className="question-card"
-                                    onClick={() => handleQuestionClick(question)}
+
                                 >
                                     <div className={"question-left postStats"}>
                                         <p>{question.views} views</p>
                                         <p>{dataModel.getQuestionAnswers(question.qid).length} answers</p>
                                     </div>
                                     <div className={"question-mid"}>
-                                        <h4 className={"postTitle"}>{question.title}</h4>
+                                        <h4 className={"postTitle"}
+                                            onClick={() => handleQuestionClick(question)}
+                                        >{question.title}</h4>
                                         <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
                                         <div className="tags">
                                             {question.getTagsWithNames(dataModel.tags).map(tag => (
