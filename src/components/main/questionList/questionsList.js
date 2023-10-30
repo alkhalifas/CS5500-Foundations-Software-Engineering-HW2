@@ -4,12 +4,8 @@ import QuestionForm from "../questionForm/questionForm";
 import "./questionList.css"
 import AnswersPage from "../Answers/AnswersPage";
 import QuestionCardTiming from "./QuestionCardTiming";
+import formatQuestionText from "../utils"
 
-const formatQuestionText = (text) => {
-    const regex = /\[(.*?)\]\((.*?)\)/g;
-    const formattedText = text.replace(regex, '<a href="$2" target="_blank">$1</a>');
-    return { __html: formattedText };
-};
 
 export default function QuestionsList() {
     const [showForm, setShowForm] = useState(false);

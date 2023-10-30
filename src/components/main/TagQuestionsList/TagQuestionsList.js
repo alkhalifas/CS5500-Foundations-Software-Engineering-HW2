@@ -1,6 +1,7 @@
 import React from 'react';
 import dataModel from '../../../models/datamodel';
 import QuestionCardTiming from "../questionList/QuestionCardTiming";
+import formatQuestionText from "../utils";
 
 export default function TagQuestionsList({ tagId }) {
     // const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -39,7 +40,7 @@ export default function TagQuestionsList({ tagId }) {
                             </div>
                             <div className={"question-mid"}>
                                 <h4 className={"postTitle"}>{question.title}</h4>
-                                <p style={{"fontSize":"12px"}}>{question.text}</p>
+                                <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
                                 {/*<p>Tags: {question.tags}</p>*/}
                                 {/*<p>Tags: {question.getTagNames(dataModel.tags).join(', ')}</p>*/}
                                 <div className="tags">
