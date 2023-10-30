@@ -40,6 +40,19 @@ export default function AnswerForm({ onSubmit }) {
         // Text validation
         if (!data.text.trim()) {
             errors.text = "Answer text cannot be empty";
+        } else {
+            // Hyperlinks Validation
+            const regex = /\[(.*?)\]\((.*?)\)/g;
+            const text = data.text;
+            let match;
+            while ((match = regex.exec(text)) !== null) {
+                const hyperlinkName = match[1];
+                const hyperlinkURL = match[2];
+                if (!hyperlinkName.trim() || !hyperlinkURL.trim() || !hyperlinkURL.startsWith('https://')) {
+                    errors.text = "Invalid hyperlink constraints";
+                    break;
+                }
+            }
         }
 
         return errors;
