@@ -17,7 +17,7 @@ In the sections below, list and describe each contribution briefly.
 - [X] Add Question
 - [ ] Searching
 - [X] Sorting
-- [ ] Hyperlink Support
+- [X] Hyperlink Support
 
 
 
