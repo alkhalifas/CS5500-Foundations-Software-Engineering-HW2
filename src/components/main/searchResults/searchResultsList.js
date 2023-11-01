@@ -119,31 +119,37 @@ export default function SearchResultsList({ searchInput }) {
                             <button className={"sort-button"} onClick={() => handleSort('unanswered')}>Unanswered</button>
                         </div>
                     </div>
-                    <div className="question-cards scrollable-container">
-                        {searchResults.map((question, index) => (
-                            <div key={question.qid}>
-                                <div key={question.qid} className="question-card">
-                                    <div className={"question-left postStats"}>
-                                        <p>{question.views} views</p>
-                                        <p>{dataModel.getQuestionAnswers(question.qid).length} answers</p>
-                                    </div>
-                                    <div className={"question-mid"}>
-                                        <h4 className={"postTitle"} onClick={() => handleQuestionClick(question)}>{question.title}</h4>
-                                        <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
-                                        <div className="tags">
-                                            {question.getTagsWithNames(dataModel.tags).map(tag => (
-                                                <span key={tag.id} className="badge">{tag.name}</span>
-                                            ))}
+                    {searchResults.length === 0 ? (
+                        <div className="no-questions-found-message">
+                            <h3>No Questions Found</h3>
+                        </div>
+                    ) : (
+                        <div className="question-cards scrollable-container">
+                            {searchResults.map((question, index) => (
+                                <div key={question.qid}>
+                                    <div key={question.qid} className="question-card">
+                                        <div className={"question-left postStats"}>
+                                            <p>{question.views} views</p>
+                                            <p>{dataModel.getQuestionAnswers(question.qid).length} answers</p>
+                                        </div>
+                                        <div className={"question-mid"}>
+                                            <h4 className={"postTitle"} onClick={() => handleQuestionClick(question)}>{question.title}</h4>
+                                            <p style={{"fontSize":"12px"}} dangerouslySetInnerHTML={formatQuestionText(question.text)} />
+                                            <div className="tags">
+                                                {question.getTagsWithNames(dataModel.tags).map(tag => (
+                                                    <span key={tag.id} className="badge">{tag.name}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className={"question-right lastActivity"}>
+                                            <QuestionCardTiming question={question} />
                                         </div>
                                     </div>
-                                    <div className={"question-right lastActivity"}>
-                                        <QuestionCardTiming question={question} />
-                                    </div>
+                                    {index !== searchResults.length - 1 && <div className="dotted-line" />}
                                 </div>
-                                {index !== searchResults.length - 1 && <div className="dotted-line" />}
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </>
             )}
         </div>
