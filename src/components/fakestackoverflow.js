@@ -16,20 +16,18 @@ export default function FakeStackOverflow() {
     const handleComponentSelect = (component, tagId = null) => {
         setSelectedComponent(component);
         setSelectedTag(tagId);
-        setSearchActive(false); // Disable search when changing components
+        setSearchActive(false);
     };
 
     const renderComponent = () => {
-        if (selectedComponent === 'questions') {
-            return <QuestionsList />;
-        } else if (selectedComponent === 'tags') {
-            return <TagsList onSelectTag={tagId => handleComponentSelect('tagQuestions', tagId)} />;
-        } else if (selectedComponent === 'tagQuestions' && selectedTag) {
-            return <TagQuestionsList tagId={selectedTag} />;
-        } else if (searchActive) {
-            return <SearchResultsList searchInput={searchInput} />;
-        }
-        return null;
+        return searchActive
+            ? <SearchResultsList searchInput={searchInput} />
+            : (
+                selectedComponent === 'questions' ? <QuestionsList />
+                : selectedComponent === 'tags' ? <TagsList onSelect={tagId => handleComponentSelect('tagQuestions', tagId)} />
+                : selectedComponent === 'tagQuestions' && selectedTag ? <TagQuestionsList tagId={selectedTag} />
+                : null
+            );
     };
 
     return (

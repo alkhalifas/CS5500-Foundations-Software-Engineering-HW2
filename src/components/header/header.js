@@ -4,7 +4,6 @@ export default function Header({ setSearchInput, setSearchActive }) {
     const [searchInput, setSearchInputState] = useState('');
 
     const handleSearch = () => {
-        console.log("Entered handleSearch");
         setSearchInput(searchInput);
         setSearchActive(true);
     };
@@ -26,7 +25,6 @@ export default function Header({ setSearchInput, setSearchActive }) {
                             }
                         }}
                     />
-                    <button onClick={handleSearch}>Search</button>
                 </div>
             </div>
         </>
