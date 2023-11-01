@@ -6,7 +6,6 @@ import AnswersPage from "../Answers/AnswersPage";
 import QuestionCardTiming from "./QuestionCardTiming";
 import formatQuestionText from "../utils"
 
-
 export default function QuestionsList() {
     const [showForm, setShowForm] = useState(false);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -43,15 +42,22 @@ export default function QuestionsList() {
             sortedQuestionsArray.sort((a, b) => b.askDate - a.askDate);
         } else if (sortType === 'active') {
             sortedQuestionsArray.sort((a, b) => {
-                const aLatestAnswer = dataModel.getQuestionAnswers(a.qid).reduce(
-                    (latestDate, answer) => Math.max(latestDate, answer.ansDate),
-                    a.askDate
-                );
-                const bLatestAnswer = dataModel.getQuestionAnswers(b.qid).reduce(
-                    (latestDate, answer) => Math.max(latestDate, answer.ansDate),
-                    b.askDate
-                );
-                return bLatestAnswer - aLatestAnswer;
+                const aAnswers = dataModel.getQuestionAnswers(a.qid);
+                const bAnswers = dataModel.getQuestionAnswers(b.qid);
+
+                if (aAnswers.length === 0 && bAnswers.length === 0) {
+                    return b.askDate - a.askDate;
+                }
+
+                if (aAnswers.length === bAnswers.length) {
+                    const aLatestAnswerDate = aAnswers.reduce((latestDate, answer) =>
+                        Math.max(latestDate, answer.ansDate), a.askDate);
+                    const bLatestAnswerDate = bAnswers.reduce((latestDate, answer) =>
+                        Math.max(latestDate, answer.ansDate), b.askDate);
+                    return bLatestAnswerDate - aLatestAnswerDate;
+                }
+
+                return bAnswers.length - aAnswers.length;
             });
         } else if (sortType === 'unanswered') {
             sortedQuestionsArray = sortedQuestionsArray.filter(
@@ -115,15 +121,6 @@ export default function QuestionsList() {
                                             ))}
                                         </div>
                                     </div>
-                                    {/*<div className={"question-mid"}>*/}
-                                    {/*    <h4 className={"postTitle"}>{question.title}</h4>*/}
-                                    {/*    <p style={{"fontSize":"12px"}}>{question.text}</p>*/}
-                                    {/*    <div className="tags">*/}
-                                    {/*        {question.getTagsWithNames(dataModel.tags).map(tag => (*/}
-                                    {/*            <span key={tag.id} className="badge">{tag.name}</span>*/}
-                                    {/*        ))}*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
                                     <div className={"question-right lastActivity"}>
                                         <QuestionCardTiming question={question} />
                                     </div>

@@ -78,3 +78,8 @@
 .question-detail:hover {
   background-color: #83beff;
 }
+
+.answerText {
+    max-height: 400px;
+    overflow-y: auto;
+}
