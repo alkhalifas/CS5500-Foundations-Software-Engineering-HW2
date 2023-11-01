@@ -15,7 +15,7 @@ In the sections below, list and describe each contribution briefly.
 ## Team Member 2 Contribution (Vidhi)
 - [X] Add Answer
 - [X] Add Question
-- [ ] Searching
+- [X] Searching
 - [X] Sorting
 - [X] Hyperlink Support
 
