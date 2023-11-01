@@ -44,9 +44,26 @@ export default function QuestionForm({ onSubmit }) {
         // Text validation
         if (!data.text.trim()) {
             errors.text = "Question text cannot be empty";
+        } else {
+            // Hyperlinks Validation
+            const regex = /\[(.*?)\]\((.*?)\)/g;
+            const text = data.text;
+            let match;
+            while ((match = regex.exec(text)) !== null) {
+                const hyperlinkName = match[1];
+                const hyperlinkURL = match[2];
+                if (!hyperlinkName.trim() || !hyperlinkURL.trim() || !hyperlinkURL.startsWith('https://')) {
+                    errors.text = "Invalid hyperlink";
+                    break;
+                }
+            }
         }
 
         // Tags validation
+        if (!data.tagNames.trim()) {
+            errors.tagNames = "Tags cannot be empty";
+        }
+
         const tags = data.tagNames.trim().split(/\s+/);
         if (tags.length > 5) {
             errors.tagNames = "Cannot have more than 5 tags";

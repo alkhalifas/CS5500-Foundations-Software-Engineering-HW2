@@ -137,9 +137,9 @@ class DataModel {
         const tagNames = questionData.tagNames.split(/\s+/).map(tagName => tagName.trim());
 
         const tagIds = tagNames.map(tagName => {
-            let existingTag = this.tags.find(tag => tag.name === tagName);
+            let existingTag = this.tags.find(tag => tag.name.toLowerCase() === tagName.toLowerCase());
             if (!existingTag) {
-                existingTag = new Tag(`t${this.tags.length + 1}`, tagName);
+                existingTag = new Tag(`t${this.tags.length + 1}`, tagName.toLowerCase());
                 this.tags.push(existingTag);
             }
             return existingTag.tid;
