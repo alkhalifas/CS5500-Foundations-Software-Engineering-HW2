@@ -4,15 +4,15 @@ Read the HW specifications [here](https://northeastern-my.sharepoint.com/:w:/g/p
 
 In the sections below, list and describe each contribution briefly.
 
-## Team Member 1 Contribution
+## Team Member 1 Contribution (Saleh)
 - [X] Home Page
 - [X] View Questions for Tag
 - [X] Tags Page
 - [X] View Question
 - [X] Data Model
+- [X] Diagrams
 
-
-## Team Member 2 Contribution
+## Team Member 2 Contribution (Vidhi)
 - [X] Add Answer
 - [X] Add Question
 - [ ] Searching
@@ -21,13 +21,10 @@ In the sections below, list and describe each contribution briefly.
 
 
 
-
-
 **Create a directory design and submit your design documents there.** Design documents include the class diagrams and the sequence diagrams.
 
 ## Design Patterns:
 
-1. Facade:
-2. Singletonian: 
-3. Builder:
-4. Factory:
+1. Facade: We followed a facade pattern within the dataModel.js, within various functions such as addQuestion or addAnswer in the sense that we added all the complexities involved in the functionality under a method of that class. Another example is AnswerCardTiming.js and QuestionCardTiming.js in which we hid the complex logic of rendering time into a component that we can easily call.
+2. Singletonian: Within dataModel.js, we implemented a singletonian pattern in the sense that we have only one instance of our data, and pass that around throughout the application. We can see the single instance being enforced within the getInstance() method.
+
