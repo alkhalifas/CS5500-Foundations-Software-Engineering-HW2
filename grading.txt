@@ -1,0 +1,30 @@
+grader: Yuanqiao Li
+
+README.md has design pattern.
+eslint has no error
+
+Initial test passed.
+1.1 | Unanswered button verification
+This test adds three questions and one answer, then click "Questions", then click unanswered button, verifies the sequence
+Not working because when I click "post answer", then I click "Questions", It stops at the question I answered, and not going back to the 
+home page.
+Error: Timed out retrying after 4000ms: expected '<h4.postTitle>' to contain 'Quick question about storage on android'
+
+1.3 | Home Page Tests
+This test successfully shows all questions in model in active order
+After clicking active, the most recent answer a8, its question q4 should appear first. However it did not.
+Error: Timed out retrying after 4000ms: expected '<h4.postTitle>' to contain 'Quick question about storage on android'
+
+6.1 | Active button verification test
+This test adds a question, click active button, verifies the sequence
+This failed same as 1.1, when after created a question, I clicked questions but there is no response.
+Error: Timed out retrying after 4000ms: Expected to find content: 'android studio save string shared preference, start activity and load the saved string' but never did.
+
+9.5 | New Multiple Questions with Links
+This test Adds multiple questions with valid hyperlinks and verify
+same as 1.1, when after created a question, I clicked questions but there is no response.
+Error: Timed out retrying after 4000ms: Expected to find content: 'Test Question 2' but never did.
+
+3.33 * 3 + 2 = 12
+30 * 0.867 = 26
+Final Score: 96
